@@ -1,0 +1,88 @@
+html, body
+{
+  height: 100%;
+  margin: 0;
+}
+
+#bg-img::before
+{
+  content: "";
+
+  background-image: url(https://media.istockphoto.com/photos/brown-wooden-shelfs-fully-packed-with-books-in-a-library-picture-id900301626?k=6&m=900301626&s=612x612&w=0&h=FfNLM2lJAhU3FgBrmIXBqYoy3158KQwySOrGjNpWGOw=);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(7.5px);
+  transform: scale(1.1);
+
+  position: absolute;
+  z-index: -1;
+}
+#bg-img
+{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  position: absolute;
+}
+
+#container
+{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#library
+{
+  background-image: url(http://www.pixeden.com/media/k2/galleries/220/004-wood-melamine-subttle-pattern-background-pat.jpg);
+  width: 75%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0px 0px 25px 7.5px black inset;
+  border: 15px solid;
+  border-image: url(https://images.unsplash.com/photo-1525034687081-c702010cb70d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHRleHR1cmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80) 30;
+}
+
+.shelf
+{
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+}
+
+.shelf-border
+{
+  background-image: url(https://images.unsplash.com/photo-1525034687081-c702010cb70d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29vZCUyMHRleHR1cmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80);
+  width: 100%;
+  height: 2.5%;
+
+  box-shadow: 0 5px 25px 5px black;
+}
+
+.book
+{
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+  background-color: white;
+  width: 2.5%;
+  height: 100%;
+
+  writing-mode: vertical-lr;
+  font-size: 2em;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid black;
+  border-left: none;
+}
