@@ -4,6 +4,12 @@ html, body
   margin: 0;
 }
 
+.hidden
+{
+  opacity: 0;
+  pointer-events: none;
+}
+
 #bg-img::before
 {
   content: "";
@@ -16,15 +22,166 @@ html, body
   transform: scale(1.1);
 
   position: absolute;
-  z-index: -1;
+  z-index: -999;
 }
+
 #bg-img
 {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  pointer-events: none;
 
   position: absolute;
+}
+
+#form-container, #info-container
+{
+  background: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  height: 100%;
+  transition: all 250ms;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  z-index: 5;
+}
+
+#form-bg::before, #info-bg::before
+{
+  content: "";
+
+  background-image: url(https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGlicmFyeXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.1);
+  filter: blur(10px);
+
+  position: absolute;
+}
+
+#form-bg, #info-bg
+{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  border-radius: 20px;
+}
+
+#form-div, #info-div
+{
+  width: 35%;
+  height: 90%;
+}
+
+#form, #info
+{
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 90%;
+  height: 90%;
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+
+  border-radius: 20px;
+}
+
+#form-header
+{
+  align-self: center;
+
+  font-size: 2.5em;
+}
+
+.info-box
+{
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-box h2
+{
+  font-size: 2em;
+  font-weight: bold;
+
+  margin: 0.75rem 0;
+}
+
+.info-box p
+{
+  font-size: 1.75em;
+  margin: 0;
+}
+
+.input-box
+{
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.input-box label
+{
+  font-size: 2em;
+  font-weight: bold;
+  /*font family*/
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-box input[type="text"], .input-box input[type="number"]
+{
+  width: 90%;
+  -moz-appearance: textfield;
+
+  font-size: 1.5em;
+}
+
+.input-box textarea
+{
+  width: 90%;
+
+  font-size: 1.5em;
+}
+
+#submit
+{
+  align-self: center;
+
+  font-size: 1.5em;
+  font-weight: bold;
+
+  padding: 0.75rem;
+  border: none;
+  border-radius: 20px;
+}
+
+#submit:hover
+{
+  box-shadow: 0 0 5px 2px lightgray;
 }
 
 #container
@@ -33,6 +190,7 @@ html, body
   height: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -40,8 +198,8 @@ html, body
 #library
 {
   background-image: url(http://www.pixeden.com/media/k2/galleries/220/004-wood-melamine-subttle-pattern-background-pat.jpg);
-  width: 75%;
-  height: 80%;
+  width: 30%;
+  height: 85%;
 
   display: flex;
   flex-direction: column;
@@ -57,6 +215,7 @@ html, body
   height: 20%;
 
   display: flex;
+  align-items: flex-end;
 }
 
 .shelf-border
@@ -68,12 +227,25 @@ html, body
   box-shadow: 0 5px 25px 5px black;
 }
 
+#remove
+{
+  position: absolute;
+  top: 5%;
+
+  border: 1px solid black;
+}
+#remove:hover
+{
+  color: red;
+  cursor: pointer;
+}
+
 .book
 {
   background: linear-gradient(-90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
   background-color: white;
-  width: 2.5%;
-  height: 100%;
+  width: 7%;
+  height: 98%;
 
   writing-mode: vertical-lr;
   font-size: 2em;
@@ -83,6 +255,21 @@ html, body
   justify-content: center;
   align-items: center;
 
+  position: relative;
+
   border: 2px solid black;
   border-left: none;
+}
+
+#add-button
+{
+  color: white;
+  user-select: none;
+  font-size: 4em;
+
+  transition: 250ms;
+}
+#add-button:hover
+{
+  transform: scale(1.125);
 }
