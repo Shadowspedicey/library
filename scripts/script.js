@@ -5,9 +5,13 @@ const infoContainer = document.querySelector("#info-container");
 let shelfIndex = 1;
 let currentShelf = document.querySelector("#shelf" + shelfIndex);
 
-const book1 = new Book("kosm", "ana", 255, "nope");
-const book2 = new Book("a7a", "m4 3arf", 125, "yes");
-let books = [];
+const book1 = new Book("Utopia", "Ahmed Khaled Tawfik", 186, "Yup", "A good book that you should read");
+const book2 = new Book("A Brief History of Time", "Stephen Hawking", 256, "Kinda", "Very fucking confusing");
+
+//localStorage.removeItem("books");
+let books = JSON.parse(localStorage.getItem("books")) || [book1, book2];
+console.log(books);
+
 
 function Book(title, author, nOfPages, read, notes)
 {
@@ -25,20 +29,14 @@ function AddBookToArray(book)
 {
   books.push(book);
   AddArraytoLibrary();
-  AddInfoWindows(book);
+  localStorage.setItem("books", JSON.stringify(books));
 }
-AddBookToArray(book1)
-AddBookToArray(book2);
 
 let addButton = document.querySelector("#add-button");
 addButton.addEventListener("click", () =>
 {
   formContainer.classList.toggle("hidden");
 });
-
-let inputs =
-{
-}
 
 let submit = document.querySelector("#submit");
 function ToggleForm()
@@ -86,6 +84,7 @@ function AddArraytoLibrary()
       }
       if (doesBookExist()) { Book.remove(); return; }
 
+
       Book.dataset.index = books.indexOf(book);
       Book.classList.add("book");
       Book.style.height = book.height + "%";
@@ -105,7 +104,19 @@ function AddArraytoLibrary()
         currentShelf = document.querySelector("#shelf" + shelfIndex);
       }
       currentShelf.appendChild(Book);
-      AddRemoveButtons();
+
+      let fontsize = parseFloat(window.getComputedStyle(Book, null).getPropertyValue('font-size'));
+      if (isOverflown(Book))
+      {
+        while (isOverflown(Book))
+        {
+          fontsize -= 2.5;
+          Book.style.fontSize = fontsize + "px";
+        }
+      }
+
+      AddRemoveButtons(book);
+      AddInfoWindows(book);
     });
 }
 
@@ -125,7 +136,7 @@ let checkForm = function()
   return true;
 }
 
-function AddRemoveButtons()
+function AddRemoveButtons(_book)
 {
   const domBooks = document.querySelectorAll(".book");
   domBooks.forEach(book => book.addEventListener("mouseover", () => book.querySelector("#remove").classList.remove("hidden")));
@@ -134,11 +145,14 @@ function AddRemoveButtons()
   const removeButtons = document.querySelectorAll("#remove");
   removeButtons.forEach(button =>
     {
+      if(button.parentElement.dataset.index != books.indexOf(_book)) return;
       button.addEventListener("click", (e) =>
       {
         e.stopPropagation();
-        button.parentElement.remove();
-        books.splice(button.parentElement.dataset.index, 1);
+        e.target.parentElement.remove();
+        books.splice(e.target.parentElement.dataset.index, 1);
+        console.log(e.target.parentElement.dataset.index);
+        localStorage.setItem("books", JSON.stringify(books));
       });
     });
 }
@@ -170,7 +184,6 @@ function isOverflown(element)
 {
   return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
-console.log(isOverflown(currentShelf));
 
 window.addEventListener("click", (e) =>
 {
@@ -182,3 +195,5 @@ window.addEventListener("click", (e) =>
 
   if (e.target.id === "info-container") ToggleInfo();
 });
+
+AddArraytoLibrary();
