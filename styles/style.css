@@ -111,8 +111,8 @@ html, body
   display: flex;
   flex-direction: column;
 
-  margin-left: 3rem;
-  margin-bottom: 2rem;
+  margin-left: 3vw;
+  margin-bottom: 3.25vh;
 }
 
 .input-box label
@@ -134,21 +134,22 @@ input::-webkit-inner-spin-button
   width: 90%;
   -moz-appearance: textfield;
 
-  font-size: 1.5em;
+  font-size: 2.5vh;
 }
 
 .input-box textarea
 {
   width: 90%;
+  height: 12.5vh;
 
-  font-size: 1.5em;
+  font-size: 2.5vh;
 }
 
 #submit
 {
   align-self: center;
 
-  font-size: 1.5em;
+  font-size: 2.5vh;
   font-weight: bold;
 
   padding: 0.75rem;
@@ -166,13 +167,13 @@ input::-webkit-inner-spin-button
   display: flex;
   flex-direction: column;
 
-  margin-left: 3rem;
-  margin-bottom: 0.75rem;
+  margin-left: 3vw;
+  margin-bottom: 2vh;
 }
 
 .info-box h2
 {
-  font-size: 200%;
+  font-size: 3.25vh;
   font-weight: bold;
 
   margin: 0.75rem 0;
@@ -180,7 +181,7 @@ input::-webkit-inner-spin-button
 
 .info-box p
 {
-  font-size: 1.75em;
+  font-size: 2.85vh;
   margin: 0;
 }
 
@@ -244,7 +245,7 @@ input::-webkit-inner-spin-button
 {
   background: linear-gradient(-90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
   background-color: white;
-  width: 7%;
+  width: 2vw;
   height: 98%;
   transition: transform 200ms;
 
@@ -285,4 +286,42 @@ input::-webkit-inner-spin-button
 @font-face {
   font-family: "SnickerSnack";
   src: url(fonts/SnickerSnack-BgDV.ttf);
+}
+
+@media (max-width: 1570px)
+{
+  #remove
+  {
+    transform: scale(0.75);
+  }
+}
+@media (max-width: 1240px)
+{
+  #remove
+  {
+    transform: scale(0.6);
+  }
+}
+@media (max-device-width: 550px)
+{
+  #library
+  {
+    width: 60%;
+    height: 65%;
+  }
+
+  .book
+  {
+    width: 5vw;
+  }
+
+  #info-div, #form-div
+  {
+    width: 75%;
+  }
+
+  #remove
+  {
+    transform: scale(1.25);
+  }
 }

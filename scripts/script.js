@@ -111,7 +111,9 @@ function AddArraytoLibrary()
         while (isOverflown(Book))
         {
           fontsize -= 2.5;
+          //fontsize = "xx-small"
           Book.style.fontSize = fontsize + "px";
+          Book.textContent.height = 80 + "%";
         }
       }
 
@@ -139,9 +141,7 @@ let checkForm = function()
 function AddRemoveButtons(_book)
 {
   const domBooks = document.querySelectorAll(".book");
-  domBooks.forEach(book => book.addEventListener("mouseover", () => book.querySelector("#remove").classList.remove("hidden")));
-  domBooks.forEach(book => book.addEventListener("mouseout", () => book.querySelector("#remove").classList.add("hidden")));
-
+  
   const removeButtons = document.querySelectorAll("#remove");
   removeButtons.forEach(button =>
     {
@@ -155,6 +155,20 @@ function AddRemoveButtons(_book)
         localStorage.setItem("books", JSON.stringify(books));
       });
     });
+
+  if (/Mobi|Android/i.test(navigator.userAgent)) 
+  {
+    const removeButtons = document.querySelectorAll("#remove");
+    removeButtons.forEach(button =>
+      {
+        button.classList.remove("hidden");
+      });
+    return;
+  }
+
+  domBooks.forEach(book => book.addEventListener("mouseover", () => book.querySelector("#remove").classList.remove("hidden")));
+  domBooks.forEach(book => book.addEventListener("mouseout", () => book.querySelector("#remove").classList.add("hidden")));
+
 }
 
 function ToggleInfo()
