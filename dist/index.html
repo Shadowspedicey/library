@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Library</title>
+
+		<link rel="stylesheet" href="./style.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	</head>
+	<body>
+		<div id="bg-img"></div>
+		<div id="form-container" class="hidden">
+			<div id="form-div">
+				<div id="form-bg">
+					<form id="form" action="">
+						<h1 id="form-header">Book Info</h1>
+						<div class="input-box">
+							<label for="title">Title:</label>
+							<input id="title" type="text" placeholder="eg: Republic" required>
+						</div>
+						<div class="input-box">
+							<label for="author">Author:</label>
+							<input id="author" type="text" placeholder="eg: Plato" required>
+						</div>
+						<div class="input-box">
+							<label for="numberofpages">Number of Pages:</label>
+							<input id="numberofpages" type="number" placeholder="eg: 700" required>
+						</div>
+						<div class="input-box">
+							<label for="read">Read?</label>
+							<input id="read" type="text" placeholder="eg: Yeah" required>
+						</div>
+						<div class="input-box">
+							<label for="notes">Notes:</label>
+							<textarea name="notes" id="notes"></textarea>
+						</div>
+						<input id="submit" type="button" value="Add!">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="info-container" class="hidden">
+			<div id="info-div">
+				<div id="info-bg">
+					<div id="info">
+						<h1 id="info-header">Book Info</h1>
+						<div class="info-box">
+							<h2>Title:</h2>
+							<p id="title-info"></p>
+						</div>
+						<div class="info-box">
+							<h2>Author:</h2>
+							<p id="author-info"></p>
+						</div>
+						<div class="info-box">
+							<h2>Number of Pages:</h2>
+							<p id="nOfPages-info"></p>
+						</div>
+						<div class="info-box">
+							<h2>Read?</h2>
+							<p id="read-info"></p>
+						</div>
+						<div class="info-box">
+							<h2>Notes:</h2>
+							<p id="notes-info"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="library">
+				<div class ="shelf" id="shelf1">
+
+				</div>
+				<div class="shelf-border"></div>
+				<div class ="shelf" id="shelf2">
+
+				</div>
+				<div class="shelf-border"></div>
+				<div class ="shelf" id="shelf3">
+
+				</div>
+				<div class="shelf-border"></div>
+				<div class ="shelf" id="shelf4">
+
+				</div>
+				<div class="shelf-border"></div>
+				<div class ="shelf" id="shelf5">
+
+				</div>
+			</div>
+			<div id="add-button">Add Book!</div>
+		</div>
+		<script src="./main.js"></script>
+	</body>
+</html>
