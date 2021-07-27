@@ -9,7 +9,7 @@ let currentShelf = document.querySelector("#shelf" + shelfIndex);
 const book1 = new Book("Utopia", "Ahmed Khaled Tawfik", 186, "Yup", "A good book that you should read");
 const book2 = new Book("A Brief History of Time", "Stephen Hawking", 256, "Kinda", "Very fucking confusing");
 
-localStorage.removeItem("books");
+//localStorage.removeItem("books");
 let books = JSON.parse(localStorage.getItem("books")) || [book1, book2];
 console.log(books);
 
