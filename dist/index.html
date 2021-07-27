@@ -11,19 +11,19 @@
 		<div id="form-container" class="hidden">
 			<div id="form-div">
 				<div id="form-bg">
-					<form id="form" action="">
+					<form id="form" action="javascript:void(0);">
 						<h1 id="form-header">Book Info</h1>
 						<div class="input-box">
 							<label for="title">Title:</label>
-							<input id="title" type="text" placeholder="eg: Republic" required>
+							<input id="title" type="text" placeholder="eg: Republic" required minlength="2">
 						</div>
 						<div class="input-box">
 							<label for="author">Author:</label>
-							<input id="author" type="text" placeholder="eg: Plato" required>
+							<input id="author" type="text" placeholder="eg: Plato" required minlength="2">
 						</div>
 						<div class="input-box">
 							<label for="numberofpages">Number of Pages:</label>
-							<input id="numberofpages" type="number" placeholder="eg: 700" required>
+							<input id="numberofpages" type="number" placeholder="eg: 700" required min="50" max="1000">
 						</div>
 						<div class="input-box">
 							<label for="read">Read?</label>
@@ -33,11 +33,12 @@
 							<label for="notes">Notes:</label>
 							<textarea name="notes" id="notes"></textarea>
 						</div>
-						<input id="submit" type="button" value="Add!">
+						<button id="submit">Add!</button>
 					</form>
 				</div>
 			</div>
 		</div>
+
 		<div id="info-container" class="hidden">
 			<div id="info-div">
 				<div id="info-bg">

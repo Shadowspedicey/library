@@ -1,14 +1,15 @@
-let formOpened = false;
-let infoOpened = false;
 const formContainer = document.querySelector("#form-container");
 const infoContainer = document.querySelector("#info-container");
+const form = document.querySelector("form");
+let formOpened = false;
+let infoOpened = false;
 let shelfIndex = 1;
 let currentShelf = document.querySelector("#shelf" + shelfIndex);
 
 const book1 = new Book("Utopia", "Ahmed Khaled Tawfik", 186, "Yup", "A good book that you should read");
 const book2 = new Book("A Brief History of Time", "Stephen Hawking", 256, "Kinda", "Very fucking confusing");
 
-//localStorage.removeItem("books");
+localStorage.removeItem("books");
 let books = JSON.parse(localStorage.getItem("books")) || [book1, book2];
 console.log(books);
 
@@ -35,6 +36,7 @@ function AddBookToArray(book)
 let addButton = document.querySelector("#add-button");
 addButton.addEventListener("click", () =>
 {
+	ClearForm();
 	formContainer.classList.toggle("hidden");
 });
 
@@ -47,24 +49,20 @@ function ToggleForm()
 function ClearForm()
 {
 	const inputArray = [...document.querySelectorAll("input")];
-	inputArray.forEach(input =>
-	{
-		if (input.id === "submit") return;
-		input.value = null;
-	});
+	inputArray.forEach(input => input.value = null);
 }
 submit.addEventListener("click", () =>
 {
-	if (!checkForm()) return alert("Please fill all fields.");
-	ToggleForm();
+	//if (!checkForm()) return alert("Please fill all fields.");
+	if (!checkForm()) return;
 	let title = document.querySelector("#title").value;
 	let author = document.querySelector("#author").value;
 	let nOfPages = document.querySelector("#numberofpages").value;
 	let read = document.querySelector("#read").value;
 	let notes = document.querySelector("#notes").value;
 	let book = new Book(title, author, nOfPages, read, notes);
+	ToggleForm();
 	AddBookToArray(book);
-	ClearForm();
 });
 
 function AddArraytoLibrary()
@@ -78,7 +76,8 @@ function AddArraytoLibrary()
 		{
 			for (let i = 0; i < domBooksArray.length; i++)
 			{
-				if (domBooksArray[i].dataset.index === books.indexOf(book)) return true;
+				// eslint-disable-next-line eqeqeq
+				if (domBooksArray[i].dataset.index == books.indexOf(book)) return true;
 			}
 			return false;
 		};
@@ -111,7 +110,6 @@ function AddArraytoLibrary()
 			while (isOverflown(Book))
 			{
 				fontsize -= 2.5;
-				//fontsize = "xx-small"
 				Book.style.fontSize = fontsize + "px";
 				Book.textContent.height = 80 + "%";
 			}
@@ -122,21 +120,23 @@ function AddArraytoLibrary()
 	});
 }
 
-let checkForm = function()
+function checkForm()
 {
-	const inputArray = [...document.querySelectorAll("input")];
-	for (let i = 0; i < inputArray.length; i++)
+	for (let i = 0; i < form.querySelectorAll("input").length; i++)
 	{
-		if (inputArray[i].hasAttribute("required"))
+		if (!form.querySelectorAll("input")[i].checkValidity()) 
 		{
-			if (inputArray[i].value === "")
-			{
-				return false;
-			}
+			ThrowFormError(form.querySelectorAll("input")[i]);
+			return false;
 		}
 	}
 	return true;
-};
+}
+function ThrowFormError(input)
+{
+	if (input.validity.typeMismatch) input.validity.setCustomValidity("Enter the right input and let's be done with it");
+	else if (input.validity.rangeOverflow || input.validity.rangeUnderflow) input.setCustomValidity(`Homie what book are you reading that's ${input.value} pages`);
+}
 
 function AddRemoveButtons(_book)
 {
@@ -145,13 +145,13 @@ function AddRemoveButtons(_book)
 	const removeButtons = document.querySelectorAll("#remove");
 	removeButtons.forEach(button =>
 	{
-		if(button.parentElement.dataset.index !== books.indexOf(_book)) return;
+		// eslint-disable-next-line eqeqeq
+		if(button.parentElement.dataset.index != books.indexOf(_book)) return;
 		button.addEventListener("click", (e) =>
 		{
 			e.stopPropagation();
 			e.target.parentElement.remove();
 			books.splice(e.target.parentElement.dataset.index, 1);
-			console.log(e.target.parentElement.dataset.index);
 			localStorage.setItem("books", JSON.stringify(books));
 		});
 	});
@@ -159,10 +159,7 @@ function AddRemoveButtons(_book)
 	if (/Mobi|Android/i.test(navigator.userAgent)) 
 	{
 		const removeButtons = document.querySelectorAll("#remove");
-		removeButtons.forEach(button =>
-		{
-			button.classList.remove("hidden");
-		});
+		removeButtons.forEach(button => button.classList.remove("hidden"));
 		return;
 	}
 
@@ -181,7 +178,8 @@ function AddInfoWindows(_book)
 	const domBooks = document.querySelectorAll(".book");
 	domBooks.forEach(book =>
 	{
-		if(book.dataset.index !== books.indexOf(_book)) return;
+		// eslint-disable-next-line eqeqeq
+		if(book.dataset.index != books.indexOf(_book)) return;
 		book.addEventListener("click", () =>
 		{
 			ToggleInfo();
@@ -204,7 +202,6 @@ window.addEventListener("click", (e) =>
 	if (e.target.id === "form-container") 
 	{
 		ToggleForm();
-		ClearForm();
 	}
 
 	if (e.target.id === "info-container") ToggleInfo();
